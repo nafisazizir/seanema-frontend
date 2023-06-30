@@ -1,12 +1,17 @@
 import React from "react";
 import "./NavbarStyle.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { PiWavesBold } from "react-icons/pi";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   const auth = useAuth();
-  console.log(auth);
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <div className="navbar">
@@ -29,6 +34,9 @@ const Navbar = () => {
             <NavLink to="/balance" className="button-medium-text nav">
               Balance
             </NavLink>
+            <div className="button-medium-text nav" onClick={handleLogOut}>
+              Log Out
+            </div>
           </>
         ) : (
           <>
