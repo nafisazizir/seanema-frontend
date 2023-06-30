@@ -56,3 +56,9 @@
     padding: 20px 8px;
   }
 }
+
+@media (max-width: 560px) {
+  .nav {
+    font-size: 14px;
+  }
+}
