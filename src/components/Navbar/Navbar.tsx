@@ -1,12 +1,11 @@
 import React from "react";
 import "./NavbarStyle.css";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { PiWavesBold } from "react-icons/pi";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   const auth = useAuth();
-  const navigate = useNavigate();
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
