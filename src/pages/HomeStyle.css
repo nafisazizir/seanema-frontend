@@ -1,0 +1,18 @@
+.hero-title {
+  max-width: 635px;
+}
+
+.movies-page {
+  display: flex;
+  justify-content: center;
+  max-width: 1240px;
+  margin: auto;
+  padding-top: 24px;
+}
+
+@media (max-width: 1240px) {
+  .movies-page {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
