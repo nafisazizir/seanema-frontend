@@ -11,6 +11,7 @@ import UserDataService from "../../services/user";
 import { AxiosError } from "axios";
 
 const SignUp = () => {
+  document.body.style.backgroundColor = "var(--color-primary-10)";
   const history = useNavigate();
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");

@@ -14,12 +14,12 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <NavLink to="/">
-        <div className="logo-container">
+      <div className="logo-container">
+        <NavLink to="/" className="logo-container">
           <PiWavesBold className="logo" size={32} />
           <div className="logotype">SEANEMA</div>
-        </div>
-      </NavLink>
+        </NavLink>
+      </div>
 
       <div className="navbar-item">
         {auth === true ? (

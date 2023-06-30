@@ -45,3 +45,14 @@
 .active {
   color: var(--color-grey-100);
 }
+
+@media (max-width: 560px) {
+  .logo-container {
+    display: none;
+  }
+
+  .navbar {
+    justify-content: center;
+    padding: 20px 8px;
+  }
+}

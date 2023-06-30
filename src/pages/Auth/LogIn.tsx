@@ -10,6 +10,7 @@ import UserDataService from "../../services/user";
 import { AxiosError } from "axios";
 
 const LogIn = () => {
+  document.body.style.backgroundColor = "var(--color-primary-10)";
   const history = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

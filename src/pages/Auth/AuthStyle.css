@@ -97,3 +97,26 @@
   align-items: center;
   gap: 4px;
 }
+
+@media (max-width: 768px) {
+  .auth-page {
+    padding: 0px 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-page {
+    padding: 0px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 0px 16px;
+  }
+
+  .auth-container {
+    padding: 35px 40px;
+    gap: 35px;
+  }
+}
