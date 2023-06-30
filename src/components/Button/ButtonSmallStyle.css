@@ -1,0 +1,9 @@
+.button-small {
+  border-radius: 6px;
+  background-color: var(--color-primary-100);
+  padding: 12px;
+}
+
+.button-small:hover {
+  cursor: pointer;
+}

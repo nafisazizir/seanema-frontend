@@ -1,0 +1,47 @@
+.navbar {
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-white-100);
+}
+
+.navbar-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.sign-up-nav {
+  color: var(--color-primary-100);
+}
+
+.log-in-nav {
+  border-radius: 20px;
+  background-color: var(--color-primary-100);
+  padding: 6px 21px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-container:hover .logotype {
+  color: var(--color-primary-100);
+}
+
+.logo {
+  fill: var(--color-primary-100);
+}
+
+.nav {
+  color: var(--color-grey-60);
+}
+
+.active {
+  color: var(--color-grey-100);
+}

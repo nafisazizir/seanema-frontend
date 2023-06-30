@@ -86,3 +86,12 @@ a {
 .color-danger {
   color: var(--color-danger-100);
 }
+
+.logotype {
+  color: var(--color-grey-100);
+  font-size: 18px;
+  font-family: Urbanist;
+  font-style: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+}
