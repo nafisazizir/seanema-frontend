@@ -8,6 +8,7 @@
   --color-grey-80: #484848;
   --color-grey-60: #767676;
   --color-grey-20: #d2d2d2;
+  --color-grey-5: #ededed;
 
   --color-primary-100: #5925dc;
   --color-primary-80: #7a5af8;
@@ -79,8 +80,16 @@ h6 {
   font-family: Urbanist;
   font-style: normal;
   font-weight: 600;
-  line-height: 34px;
   text-align: center;
+  margin: 0px;
+}
+
+.headline-text {
+  color: var(--color-grey-100);
+  font-size: 20px;
+  font-family: Urbanist;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .button-medium-text {

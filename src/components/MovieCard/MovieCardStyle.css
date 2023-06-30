@@ -1,0 +1,38 @@
+.movie-card-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid var(--color-grey-20);
+  width: fit-content;
+  height: fit-content;
+  max-width: 255px;
+  max-height: 507px;
+  gap: 24px;
+}
+
+.poster {
+  width: 255px;
+  height: 350px;
+
+  border-radius: 15px;
+  background: var(--color-primary-10, #f4f3ff);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-movie-title {
+  text-align: start;
+}
+
+.age-rating {
+  color: var(--color-primary-100);
+}
+
+.movie-card-container:hover {
+  cursor: pointer;
+  background-color: var(--color-primary-10);
+  border: 2px solid var(--color-primary-100);
+}
