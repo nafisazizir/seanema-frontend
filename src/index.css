@@ -23,6 +23,10 @@ body {
   margin: 0px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .button-medium-text {
   color: var(--color-white-100);
   text-align: center;

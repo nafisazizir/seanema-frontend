@@ -1,11 +1,11 @@
-.signup-page {
+.auth-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.signup-container {
+.auth-container {
   background: var(--color-white-100);
   border-radius: 15px;
   padding: 55px 60px;
@@ -24,11 +24,25 @@
   width: 100%;
 }
 
+.signup-button-inactive {
+  padding: 8px;
+  background-color: var(--color-white-100);
+  border-radius: 20px 0px 0px 20px;
+  color: var(--color-primary-100);
+  border: 2px solid var(--color-primary-100);
+}
+
 .signup-button-active {
   padding: 8px;
   background-color: var(--color-primary-100);
   border-radius: 20px 0px 0px 20px;
   border: 2px solid var(--color-primary-100);
+}
+
+.signup-button-inactive:hover {
+  background-color: var(--color-primary-10);
+  border: 2px solid var(--color-primary-100);
+  cursor: pointer;
 }
 
 .signup-button-active:hover {
@@ -41,6 +55,17 @@
   border-radius: 0px 20px 20px 0px;
   color: var(--color-primary-100);
   border: 2px solid var(--color-primary-100);
+}
+
+.login-button-active {
+  padding: 8px;
+  background-color: var(--color-primary-100);
+  border-radius: 0px 20px 20px 0px;
+  border: 2px solid var(--color-primary-100);
+}
+
+.login-button-active:hover {
+  cursor: pointer;
 }
 
 .login-button-inactive:hover {
@@ -61,37 +86,14 @@
   text-align: center;
 }
 
-.button-signup {
+.button-auth {
   width: 100%;
 }
 
-.message-signup {
+.message-auth {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 4px;
-}
-
-@media (max-width: 768px) {
-  .signup-page {
-    padding: 0px 60px;
-  }
-}
-
-@media (max-width: 640px) {
-  .signup-page {
-    padding: 0px 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .signup-page {
-    padding: 0px 16px;
-  }
-
-  .signup-container {
-    padding: 35px 40px;
-    gap: 35px;
-  }
 }

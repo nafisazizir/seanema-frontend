@@ -1,23 +1,20 @@
 import React, { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./SignUpStyle.css";
-import Label from "../components/Label/Label";
-import { BsPersonFill, BsKeyFill } from "react-icons/bs";
-import { GoNumber } from "react-icons/go";
+import { useNavigate, Link } from "react-router-dom";
+import "./AuthStyle.css";
+import Label from "../../components/Label/Label";
+import { BsKeyFill } from "react-icons/bs";
 import { BiRename } from "react-icons/bi";
 import { CgDanger } from "react-icons/cg";
-import ButtonMedium from "../components/Button/ButtonMedium";
-import UserDataService from "../services/user";
+import ButtonMedium from "../../components/Button/ButtonMedium";
+import UserDataService from "../../services/user";
 import { AxiosError } from "axios";
 
-const SignUp = () => {
+const LogIn = () => {
   const history = useNavigate();
   const [username, setUsername] = useState("");
-  const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
-  const [age, setAge] = useState("");
   const [message, setMessage] = useState(
-    "By signing up, you agree to our Terms of Service and Privacy Policy."
+    "Welcome back! Nice to meet you again"
   );
   const [isWarning, setIsWarning] = useState(false);
 
@@ -25,34 +22,24 @@ const SignUp = () => {
     const newUsername = event.target.value;
     setUsername(newUsername);
   };
-  const handleFullNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newFullName = event.target.value;
-    setFullName(newFullName);
-  };
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   };
-  const handleAgeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newAge = event.target.value;
-    setAge(newAge);
-  };
 
   const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
-    if (username === "" || fullName === "" || password === "" || age === "") {
+    if (username === "" || password === "") {
       setMessage("Please fill all the fields!");
       setIsWarning(true);
       return;
     }
 
     try {
-      const response = await UserDataService.register({
+      const response = await UserDataService.login({
         username,
         password,
-        name: fullName,
-        age: parseInt(age),
       });
-      history("/login");
+      history("/");
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.message) {
         setMessage(error.response.data.message);
@@ -64,11 +51,17 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-page">
-      <div className="signup-container">
+    <div className="auth-page">
+      <div className="auth-container">
         <div className="signup-login-button">
-          <div className="signup-button-active button-small-text">Sign Up</div>
-          <div className="login-button-inactive button-small-text">Log In</div>
+          <Link to={"/signup"}>
+            <div className="signup-button-inactive button-small-text">
+              Sign Up
+            </div>
+          </Link>
+          <Link to={"/login"}>
+            <div className="login-button-active button-small-text">Log In</div>
+          </Link>
         </div>
         <div className="labels">
           <Label
@@ -79,31 +72,17 @@ const SignUp = () => {
             onChange={handleUsernameChange}
           />
           <Label
-            labelText="FULL NAME"
-            placeholderText="Type your full name"
-            icon={<BsPersonFill size={20} />}
-            value={fullName}
-            onChange={handleFullNameChange}
-          />
-          <Label
             labelText="PASSWORD"
             placeholderText="Type your password"
             icon={<BsKeyFill size={20} />}
             value={password}
             onChange={handlePasswordChange}
           />
-          <Label
-            labelText="AGE"
-            placeholderText="Type your age"
-            icon={<GoNumber size={20} />}
-            value={age}
-            onChange={handleAgeChange}
-          />
           <div
             className={
               isWarning
-                ? "paragraph-small color-danger message-signup"
-                : "paragraph-small message-signup"
+                ? "paragraph-small color-danger message-auth"
+                : "paragraph-small message-auth"
             }
           >
             {isWarning && <CgDanger />}
@@ -111,12 +90,12 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className="button-signup">
-          <ButtonMedium buttonText="Sign Up" onClick={handleClick} />
+        <div className="button-auth">
+          <ButtonMedium buttonText="Log In" onClick={handleClick} />
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default LogIn;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import LogIn from "./pages/LogIn";
+import SignUp from "./pages/Auth/SignUp";
+import LogIn from "./pages/Auth/LogIn";
 
 function App() {
   const [color, changeColor] = useState("var(--color-primary-10)");
