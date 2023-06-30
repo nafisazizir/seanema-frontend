@@ -9,12 +9,33 @@
   flex-direction: column;
   max-width: 1240px;
   margin: auto;
-  padding-top: 24px;
+  padding-bottom: 54px;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: auto;
+  gap: 16px;
 }
 
 @media (max-width: 1240px) {
   .movies-page {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-page {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

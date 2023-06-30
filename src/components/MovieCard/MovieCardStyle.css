@@ -5,9 +5,9 @@
   border-radius: 10px;
   border: 2px solid var(--color-grey-20);
   width: fit-content;
-  height: fit-content;
+  height: 460px;
   max-width: 255px;
-  max-height: 507px;
+  max-height: 460px;
   gap: 24px;
 }
 
@@ -35,4 +35,34 @@
   cursor: pointer;
   background-color: var(--color-primary-10);
   border: 2px solid var(--color-primary-100);
+}
+
+@media (max-width: 768px) {
+  .movie-card-container {
+    width: fit-content;
+    height: 340px;
+    max-width: 175px;
+    max-height: 340px;
+  }
+
+  .poster {
+    width: 175px;
+    height: 240.2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-card-container {
+    width: fit-content;
+    height: 260px;
+    max-width: 125px;
+    max-height: 260px;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .poster {
+    width: 125px;
+    height: 171px;
+  }
 }

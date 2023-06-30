@@ -2,7 +2,7 @@ import React from "react";
 import "./MovieCardStyle.css";
 
 interface MovieCardProps {
-  id: string;
+  id: number;
   title: string;
   age_rating: string;
   poster_url: string;
