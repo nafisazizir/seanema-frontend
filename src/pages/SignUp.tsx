@@ -1,12 +1,17 @@
 import React, { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUpStyle.css";
 import Label from "../components/Label/Label";
 import { BsPersonFill, BsKeyFill } from "react-icons/bs";
 import { GoNumber } from "react-icons/go";
 import { BiRename } from "react-icons/bi";
+import { CgDanger } from "react-icons/cg";
 import ButtonMedium from "../components/Button/ButtonMedium";
+import UserDataService from "../services/user";
+import { AxiosError } from "axios";
 
 const SignUp = () => {
+  const history = useNavigate();
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +19,7 @@ const SignUp = () => {
   const [message, setMessage] = useState(
     "By signing up, you agree to our Terms of Service and Privacy Policy."
   );
+  const [isWarning, setIsWarning] = useState(false);
 
   const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newUsername = event.target.value;
@@ -32,8 +38,29 @@ const SignUp = () => {
     setAge(newAge);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    console.log("Button clicked!");
+  const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
+    if (username === "" || fullName === "" || password === "" || age === "") {
+      setMessage("Please fill all the fields!");
+      setIsWarning(true);
+      return;
+    }
+
+    try {
+      const response = await UserDataService.register({
+        username,
+        password,
+        name: fullName,
+        age: parseInt(age),
+      });
+      history("/login");
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.data?.message) {
+        setMessage(error.response.data.message);
+        setIsWarning(true);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
   };
 
   return (
@@ -72,11 +99,20 @@ const SignUp = () => {
             value={age}
             onChange={handleAgeChange}
           />
-          <div className="paragraph-small">{message}</div>
+          <div
+            className={
+              isWarning
+                ? "paragraph-small color-danger message-signup"
+                : "paragraph-small message-signup"
+            }
+          >
+            {isWarning && <CgDanger />}
+            {message}
+          </div>
         </div>
 
         <div className="button-signup">
-          <ButtonMedium buttonText="Sign Up" onClick={() => handleClick} />
+          <ButtonMedium buttonText="Sign Up" onClick={handleClick} />
         </div>
       </div>
     </div>

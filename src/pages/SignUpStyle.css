@@ -65,6 +65,14 @@
   width: 100%;
 }
 
+.message-signup {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
 @media (max-width: 768px) {
   .signup-page {
     padding: 0px 60px;

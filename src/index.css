@@ -15,6 +15,8 @@
   --color-primary-40: #bdb4fe;
   --color-primary-20: #d9d6fe;
   --color-primary-10: #f4f3ff;
+
+  --color-danger-100: #e6131b;
 }
 
 body {
@@ -75,4 +77,8 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+}
+
+.color-danger {
+  color: var(--color-danger-100);
 }
