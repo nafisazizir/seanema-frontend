@@ -78,7 +78,7 @@ const MovieDetails = () => {
               {movie?.description}
             </div>
             <div className="paragraph-small released-details">
-              Released at: {dateReadable}
+              Released at {dateReadable}
             </div>
             {auth == true ? (
               <HashLink to={"/movies/" + id + "#showtimes"} smooth>

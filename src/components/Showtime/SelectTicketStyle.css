@@ -1,0 +1,73 @@
+.ticket-modal {
+  width: 250px;
+  height: 250px;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: var(--color-white-100);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  outline: 0;
+}
+
+.ticket-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket-counter {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket-counter h2 {
+  margin: 0px;
+}
+
+.select-ticket-button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.counter-icon {
+  background-color: var(--color-white-100);
+  border: 1px solid var(--color-grey-20);
+  padding: 12px;
+  font-size: 20px;
+  border-radius: 30px;
+  margin: auto;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.counter-icon:hover {
+  background-color: var(--color-primary-10);
+  border: 1px solid var(--color-primary-100);
+  color: var(--color-primary-100);
+}
+
+.disable {
+  background-color: var(--color-white-100);
+  border: 1px solid var(--color-grey-20);
+  padding: 12px;
+  font-size: 20px;
+  border-radius: 30px;
+  margin: auto;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-20);
+}

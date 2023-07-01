@@ -8,7 +8,14 @@ interface ButtonSmallProps {
 
 const ButtonSmall: React.FC<ButtonSmallProps> = ({ buttonText, onClick }) => {
   return (
-    <div className="button-small button-small-text" onClick={onClick}>
+    <div
+      className={
+        buttonText !== "Cancel"
+          ? "button-small button-small-text"
+          : "button-small-danger button-small-text"
+      }
+      onClick={onClick}
+    >
       {buttonText}
     </div>
   );

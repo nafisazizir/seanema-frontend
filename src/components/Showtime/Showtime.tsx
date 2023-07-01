@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import MovieDataService from "../../services/movie";
 import "./ShowtimeStyle.css";
-import useAuth from "../../hooks/useAuth";
+import SelectTicket from "./SelectTicket";
 
 interface SHowtimeProps {
   id: number;
@@ -21,9 +20,16 @@ interface Showtime {
 }
 
 const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
-  const auth = useAuth();
-  const navigate = useNavigate();
   const [showtime, setShowtime] = useState<ShowtimesByDate>({});
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -53,8 +59,11 @@ const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
                 {shows.map((show) => {
                   return (
                     <>
-                      <div className="showtime-item headline-text">
-                        {show.start_time}
+                      <div
+                        className="showtime-item headline-text"
+                        onClick={handleOpenModal}
+                      >
+                        {show.start_time.slice(0, 5)}
                       </div>
                     </>
                   );
@@ -64,6 +73,7 @@ const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
           );
         })}
       </div>
+      <SelectTicket isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 };
