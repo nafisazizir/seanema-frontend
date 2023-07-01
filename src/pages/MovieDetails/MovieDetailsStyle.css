@@ -1,11 +1,14 @@
 .movie-details-page {
-  display: grid;
-  grid-template-columns: 2fr 5fr;
-  gap: 32px;
   max-width: 1240px;
   margin: auto;
   padding-top: 54px;
   padding-bottom: 54px;
+}
+
+.movie-details-container {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  gap: 32px;
 }
 
 .poster-details {
@@ -66,6 +69,9 @@
 @media (max-width: 768px) {
   .movie-details-page {
     padding-top: 24px;
+  }
+
+  .movie-details-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;

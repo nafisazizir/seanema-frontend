@@ -1,5 +1,6 @@
 import React from "react";
 import "./MovieCardStyle.css";
+import { useNavigate } from "react-router-dom";
 
 interface MovieCardProps {
   id: number;
@@ -14,8 +15,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
   age_rating,
   poster_url,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/movies/${id}`);
+  };
+
   return (
-    <div className="movie-card-container">
+    <div className="movie-card-container" onClick={handleClick}>
       <div
         className="poster"
         style={{
@@ -33,3 +40,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 };
 
 export default MovieCard;
+function useParams(): { course_code: any; curriculum: any; } {
+  throw new Error("Function not implemented.");
+}
+
