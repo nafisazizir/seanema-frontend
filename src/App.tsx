@@ -3,17 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUp from "./pages/Auth/SignUp";
 import LogIn from "./pages/Auth/LogIn";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
 
 function App() {
-  const [color, changeColor] = useState("var(--color-primary-10)");
-  document.body.style.backgroundColor = color;
-
   return (
     <>
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Home />} />
+          <Route path="/movies/:id" element={<MovieDetails />} />
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />

@@ -1,9 +1,12 @@
 .button-medium {
   border-radius: 6px;
   background-color: var(--color-primary-100);
+  border: 2px solid var(--color-primary-100);
   padding: 12px;
 }
 
 .button-medium:hover {
   cursor: pointer;
+  background-color: var(--color-primary-10);
+  color: var(--color-primary-100);
 }
