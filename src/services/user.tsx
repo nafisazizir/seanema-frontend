@@ -25,9 +25,7 @@ class UserDataService {
       .post("/user/login", params)
       .then((response: AxiosResponse<Token>) => {
         const { token } = response.data;
-        console.log(token);
         localStorage.setItem("token", token);
-        console.log(localStorage)
 
         return response;
       });
