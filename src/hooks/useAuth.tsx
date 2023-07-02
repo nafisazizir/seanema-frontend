@@ -1,4 +1,5 @@
 import jwt_decode, { JwtPayload } from "jwt-decode";
+import { setAuthToken } from "./setAuthToken";
 
 export function useAuth() {
   let isLoggedIn = false;
@@ -11,6 +12,7 @@ export function useAuth() {
     if (decodedToken?.exp && decodedToken.exp > currentTime) {
       // Token is valid and not expired
       isLoggedIn = true;
+      setAuthToken(token);
     } else {
       // Token is expired
       isLoggedIn = false;
@@ -18,6 +20,5 @@ export function useAuth() {
       localStorage.removeItem("token");
     }
   }
-
   return isLoggedIn;
 }

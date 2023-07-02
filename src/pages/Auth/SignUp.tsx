@@ -9,10 +9,12 @@ import { CgDanger } from "react-icons/cg";
 import ButtonMedium from "../../components/Button/ButtonMedium";
 import UserDataService from "../../services/user";
 import { AxiosError } from "axios";
+import { logout } from "../../hooks/logout";
 
 const SignUp = () => {
   document.body.style.backgroundColor = "var(--color-primary-10)";
   const history = useNavigate();
+  const logOut = logout();
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");

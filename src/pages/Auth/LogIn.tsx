@@ -8,9 +8,11 @@ import { CgDanger } from "react-icons/cg";
 import ButtonMedium from "../../components/Button/ButtonMedium";
 import UserDataService from "../../services/user";
 import { AxiosError } from "axios";
+import { logout } from "../../hooks/logout";
 
 const LogIn = () => {
   document.body.style.backgroundColor = "var(--color-primary-10)";
+  const logOut = logout();
   const history = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +43,7 @@ const LogIn = () => {
         password,
       });
       history("/");
+      window.location.reload();
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.message) {
         setMessage(error.response.data.message);

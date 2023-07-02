@@ -1,14 +1,17 @@
 import React from "react";
 import "./NavbarStyle.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PiWavesBold } from "react-icons/pi";
 import { useAuth } from "../../hooks/useAuth";
+import { logout } from "../../hooks/logout";
 
 const Navbar = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    logout();
+    navigate("/movies");
     window.location.reload();
   };
 

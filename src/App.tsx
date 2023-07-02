@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 import Home from "./pages/Home";
 import SignUp from "./pages/Auth/SignUp";
 import LogIn from "./pages/Auth/LogIn";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import Balance from "./pages/Balance/Balance";
 
 function App() {
   return (
@@ -16,6 +23,11 @@ function App() {
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
+
+          <Route
+            path="/balance"
+            element={useAuth() == true ? <Balance /> : <Navigate to="/login" />}
+          />
         </Routes>
       </Router>
     </>

@@ -1,5 +1,7 @@
 import http from "../http-common";
+import axios from "axios";
 import { AxiosResponse } from "axios";
+import { setAuthToken } from "../hooks/setAuthToken";
 
 interface User {
   id: number;
@@ -26,9 +28,14 @@ class UserDataService {
       .then((response: AxiosResponse<Token>) => {
         const { token } = response.data;
         localStorage.setItem("token", token);
+        setAuthToken(token);
 
         return response;
       });
+  }
+
+  getBalance(): Promise<AxiosResponse<User>> {
+    return http.get("user/balance");
   }
 }
 
