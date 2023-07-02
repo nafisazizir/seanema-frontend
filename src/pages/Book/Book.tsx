@@ -3,17 +3,32 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import UserDataService from "../../services/user";
 import TicketDataService from "../../services/ticket";
+import MovieDataService from "../../services/movie";
 import AgeRatingModal from "./AgeRatingModal";
 import "./BookStyle.css";
+import ButtonMedium from "../../components/Button/ButtonMedium";
+
+interface Movie extends Record<string, number | string | Date> {
+  id: number;
+  title: string;
+  description: string;
+  release_date: string;
+  poster_url: string;
+  age_rating: string;
+  ticket_price: number;
+}
 
 const Book = () => {
-  const { showtimeId } = useParams();
+  const { movieId, showtimeId } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let amount = searchParams.get("amount");
   const navigate = useNavigate();
   const [isAllowed, setIsAllowed] = useState(true);
   const [availableSeats, setAvailableSeats] = useState<number[]>([]);
+  const [movie, setMovie] = useState<Movie>();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
 
   const handleNotAllowedUser = () => {
     navigate("/movies");
@@ -46,11 +61,25 @@ const Book = () => {
       }
     };
 
+    const fetchMovieDetails = async () => {
+      try {
+        const response = await MovieDataService.getMovieDetails(
+          movieId ? parseInt(movieId) : 0
+        );
+        setMovie(response.data);
+      } catch (error) {
+        console.error("Failed to fetch available seats:", error);
+      }
+    };
+
     checkAgeRating();
     fetchAvailableSeats();
+    fetchMovieDetails();
   }, []);
 
-  const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
+  useEffect(() => {
+    setTotalPrice(movie ? movie?.ticket_price * selectedSeats.length : 0);
+  }, [selectedSeats]);
 
   const handleSeatClick = (seat: number) => {
     if (selectedSeats.includes(seat)) {
@@ -58,7 +87,9 @@ const Book = () => {
         selectedSeats.filter((selectedSeat) => selectedSeat !== seat)
       );
     } else {
-      setSelectedSeats([...selectedSeats, seat]);
+      if (selectedSeats.length < 6) {
+        setSelectedSeats([...selectedSeats, seat]);
+      }
     }
   };
 
@@ -91,13 +122,19 @@ const Book = () => {
     return seats;
   };
 
-  console.log(selectedSeats);
+  const renderSelectedSeats = () => {
+    return selectedSeats.map((seat) => (
+      <div key={seat} className="selected-seat">
+        Seat {seat}
+      </div>
+    ));
+  };
 
   return (
     <>
       <Navbar />
       <AgeRatingModal isOpen={!isAllowed} onClose={handleNotAllowedUser} />
-      <div className="page-template">
+      <div className="book-page">
         <div className="seat-legend paragraph-small">
           <div className="seat-legend-item">
             <div className="seat seat-disabled" />
@@ -113,12 +150,42 @@ const Book = () => {
           </div>
         </div>
 
+        <h6>SCREEN</h6>
         <div className="seat-grid">{renderSeats()}</div>
 
-        <div className="seat-summary-grid">
-          <div className="total-price-container">TOTAL PRICE</div>
-          <div className="selected-seats-container">SELECTED SEATS</div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+          }}
+        >
+          <div className="warning-max-seat paragraph-small">
+            Max. number of tickets are 6 per transaction
+          </div>
+
+          <div className="seat-summary-grid">
+            <div className="total-price-container">
+              <div className="paragraph-normal">TOTAL PRICE</div>
+              <h6>Rp {totalPrice.toLocaleString()}</h6>
+            </div>
+            <div className="selected-seats-container">
+              <div className="paragraph-normal">SELECTED SEATS</div>
+              <h6>
+                {selectedSeats.length > 0
+                  ? selectedSeats.toString()
+                  : "No seat selected"}
+              </h6>
+            </div>
+          </div>
         </div>
+
+        {selectedSeats.length > 0 && (
+          <ButtonMedium
+            buttonText="Continue"
+            onClick={() => console.log("yeay")}
+          />
+        )}
       </div>
     </>
   );
