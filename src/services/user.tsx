@@ -17,6 +17,10 @@ interface Token {
   token: string;
 }
 
+interface CheckAge {
+  isAllowed: boolean;
+}
+
 class UserDataService {
   register(params: any): Promise<AxiosResponse<User>> {
     return http.post("/user/register", params);
@@ -44,6 +48,10 @@ class UserDataService {
 
   withdraw(amount: number): Promise<AxiosResponse<User>> {
     return http.post("user/withdraw", { amount: amount });
+  }
+
+  checkAge(showtimeId: number): Promise<AxiosResponse<CheckAge>> {
+    return http.get(`user/check-age/${showtimeId}`);
   }
 }
 
