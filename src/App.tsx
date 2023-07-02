@@ -12,6 +12,7 @@ import LogIn from "./pages/Auth/LogIn";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import Balance from "./pages/Balance/Balance";
 import Book from "./pages/Book/Book";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route path="/movies" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
           <Route path="/movies/:movieId/book/:showtimeId" element={<Book />} />
+          <Route
+            path="/movies/:movieId/book/:showtimeId/payment"
+            element={<Payment />}
+          />
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />

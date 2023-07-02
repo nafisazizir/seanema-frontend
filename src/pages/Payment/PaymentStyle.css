@@ -1,0 +1,27 @@
+.payment-page {
+  max-width: 500px;
+  margin: auto;
+  padding-top: 54px;
+  padding-bottom: 54px;
+}
+
+@media (max-width: 1240px) {
+  .payment-page {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-page {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

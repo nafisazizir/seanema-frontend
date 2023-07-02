@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import UserDataService from "../../services/user";
 import TicketDataService from "../../services/ticket";
 import MovieDataService from "../../services/movie";
 import AgeRatingModal from "./AgeRatingModal";
 import "./BookStyle.css";
+import queryString from "query-string";
 import ButtonMedium from "../../components/Button/ButtonMedium";
 
 interface Movie extends Record<string, number | string | Date> {
@@ -20,9 +21,6 @@ interface Movie extends Record<string, number | string | Date> {
 
 const Book = () => {
   const { movieId, showtimeId } = useParams();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  let amount = searchParams.get("amount");
   const navigate = useNavigate();
   const [isAllowed, setIsAllowed] = useState(true);
   const [availableSeats, setAvailableSeats] = useState<number[]>([]);
@@ -35,10 +33,6 @@ const Book = () => {
   };
 
   useEffect(() => {
-    if (amount && parseInt(amount) > 6) {
-      navigate("/movies");
-    }
-
     const checkAgeRating = async () => {
       try {
         const response = await UserDataService.checkAge(
@@ -122,12 +116,12 @@ const Book = () => {
     return seats;
   };
 
-  const renderSelectedSeats = () => {
-    return selectedSeats.map((seat) => (
-      <div key={seat} className="selected-seat">
-        Seat {seat}
-      </div>
-    ));
+  const handleContinueClick = () => {
+    navigate(
+      `/movies/${movieId}/book/${showtimeId}/payment?${queryString.stringify({
+        seatNumbers: selectedSeats,
+      })}`
+    );
   };
 
   return (
@@ -181,10 +175,7 @@ const Book = () => {
         </div>
 
         {selectedSeats.length > 0 && (
-          <ButtonMedium
-            buttonText="Continue"
-            onClick={() => console.log("yeay")}
-          />
+          <ButtonMedium buttonText="Continue" onClick={handleContinueClick} />
         )}
       </div>
     </>
