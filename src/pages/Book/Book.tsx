@@ -26,8 +26,7 @@ const Book = () => {
         const response = await UserDataService.checkAge(
           showtimeId ? parseInt(showtimeId) : 0
         );
-        setIsAllowed(response.data.isAllowed);
-        console.log(response.data.isAllowed);
+        setIsAllowed(response.data.isAllowed === "true");
       } catch (error) {
         console.error("Failed to fetch movies:", error);
       }

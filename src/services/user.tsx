@@ -18,7 +18,7 @@ interface Token {
 }
 
 interface CheckAge {
-  isAllowed: boolean;
+  isAllowed: string;
 }
 
 class UserDataService {
