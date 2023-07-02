@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SelectTicketStyle.css";
 import Modal from "react-modal";
 import ButtonSmall from "../Button/ButtonSmall";
@@ -7,9 +8,15 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 interface SelectTicketProps {
   isOpen: boolean;
   onClose: () => void;
+  showtimeId: number;
 }
-const SelectTicket: React.FC<SelectTicketProps> = ({ isOpen, onClose }) => {
+const SelectTicket: React.FC<SelectTicketProps> = ({
+  isOpen,
+  onClose,
+  showtimeId,
+}) => {
   const [ticketCount, setTicketCount] = useState(0);
+  const navigate = useNavigate();
 
   // Function to handle incrementing the ticket count
   const incrementTicketCount = () => {
@@ -27,11 +34,10 @@ const SelectTicket: React.FC<SelectTicketProps> = ({ isOpen, onClose }) => {
 
   // Function to handle submitting the ticket count and closing the modal
   const handleSubmit = () => {
-    // Do something with the selected ticket count
-    console.log("Selected ticket count:", ticketCount);
-
-    // Close the modal
-    onClose();
+    if (ticketCount > 0) {
+      navigate(`/movies/book/${showtimeId}?amount=${ticketCount}`);
+      onClose();
+    }
   };
   return (
     <Modal

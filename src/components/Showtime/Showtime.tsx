@@ -73,7 +73,11 @@ const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
           );
         })}
       </div>
-      <SelectTicket isOpen={isModalOpen} onClose={handleCloseModal} />
+      <SelectTicket
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        showtimeId={id}
+      />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import SignUp from "./pages/Auth/SignUp";
 import LogIn from "./pages/Auth/LogIn";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import Balance from "./pages/Balance/Balance";
+import Book from "./pages/Book/Book";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
+          <Route path="/movies/book/:showtimeId" element={<Book />} />
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
