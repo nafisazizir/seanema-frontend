@@ -37,6 +37,14 @@ class UserDataService {
   getBalance(): Promise<AxiosResponse<User>> {
     return http.get("user/balance");
   }
+
+  topup(amount: number): Promise<AxiosResponse<User>> {
+    return http.post("user/topup", { amount: amount });
+  }
+
+  withdraw(amount: number): Promise<AxiosResponse<User>> {
+    return http.post("user/withdraw", { amount: amount });
+  }
 }
 
 export default new UserDataService();
