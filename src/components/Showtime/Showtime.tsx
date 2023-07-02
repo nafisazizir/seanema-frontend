@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MovieDataService from "../../services/movie";
+import { useNavigate } from "react-router-dom";
 import "./ShowtimeStyle.css";
-import SelectTicket from "./SelectTicket";
 
 interface SHowtimeProps {
   id: number;
@@ -21,14 +21,10 @@ interface Showtime {
 
 const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
   const [showtime, setShowtime] = useState<ShowtimesByDate>({});
-  const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleShowtimeClick = ({ showtimeId }: { showtimeId: number }) => {
+    navigate(`/movies/${id}/book/${showtimeId}`);
   };
 
   useEffect(() => {
@@ -61,7 +57,9 @@ const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
                     <>
                       <div
                         className="showtime-item headline-text"
-                        onClick={handleOpenModal}
+                        onClick={() =>
+                          handleShowtimeClick({ showtimeId: show.id })
+                        }
                       >
                         {show.start_time.slice(0, 5)}
                       </div>
@@ -73,11 +71,6 @@ const Showtime: React.FC<SHowtimeProps> = ({ id }) => {
           );
         })}
       </div>
-      <SelectTicket
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        showtimeId={id}
-      />
     </div>
   );
 };
