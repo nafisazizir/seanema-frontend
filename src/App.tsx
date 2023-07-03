@@ -24,14 +24,25 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
-          <Route path="/movies/:movieId/book/:showtimeId" element={<Book />} />
+          <Route
+            path="/movies/:movieId/book/:showtimeId"
+            element={useAuth() == true ? <Book /> : <Navigate to="/login" />}
+          />
           <Route
             path="/movies/:movieId/book/:showtimeId/payment/:ticketId"
-            element={<Payment />}
+            element={useAuth() == true ? <Payment /> : <Navigate to="/login" />}
           />
 
-          <Route path="/tickets" element={<Ticket />} />
-          <Route path="/tickets/:id" element={<TicketDetails />} />
+          <Route
+            path="/tickets"
+            element={useAuth() == true ? <Ticket /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/tickets/:id"
+            element={
+              useAuth() == true ? <TicketDetails /> : <Navigate to="/login" />
+            }
+          />
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
