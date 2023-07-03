@@ -28,6 +28,10 @@ class TicketDataService {
     return http.post(`/tickets/payment/${id}`);
   }
 
+  cancelPayment(id: number): Promise<AxiosResponse<Ticket>> {
+    return http.post(`/tickets/cancel/${id}`);
+  }
+
   getAvailableSeats(showtimeId: number): Promise<AxiosResponse<Seat>> {
     return http.get(`/tickets/seats/${showtimeId}`);
   }

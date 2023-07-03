@@ -93,6 +93,9 @@ const Payment = () => {
           ticketId ? parseInt(ticketId) : 0
         );
         setTicket(response.data);
+        if (response.data.status !== "not paid") {
+          navigate("/tickets");
+        }
       } catch (error) {
         console.error("Failed to fetch ticket details:", error);
       }
@@ -116,12 +119,26 @@ const Payment = () => {
         const response = await TicketDataService.updatePayment(
           ticketId ? parseInt(ticketId) : 0
         );
-        navigate("/tikets");
+        navigate("/tickets");
       } catch (error) {
         console.error("Failed to complete payment:", error);
       }
     };
     updatePayment();
+  };
+
+  const handleCancel = () => {
+    const cancelPayment = async () => {
+      try {
+        const response = await TicketDataService.cancelPayment(
+          ticketId ? parseInt(ticketId) : 0
+        );
+        navigate("/tickets");
+      } catch (error) {
+        console.error("Failed to complete payment:", error);
+      }
+    };
+    cancelPayment();
   };
 
   return (
@@ -155,7 +172,15 @@ const Payment = () => {
               }}
             >
               <div className="paragraph-small tag-id">#{ticket?.id}</div>
-              <div className="paragraph-small tag-warning">
+              <div
+                className={
+                  ticket?.status == "not paid"
+                    ? "paragraph-small tag-warning"
+                    : ticket?.status == "paid"
+                    ? "paragraph-small tag-success"
+                    : "paragraph-small tag-danger"
+                }
+              >
                 {ticket?.status}
               </div>
             </div>
@@ -210,10 +235,7 @@ const Payment = () => {
           </div>
 
           {isBalanceEnough ? (
-            <ButtonMedium
-              buttonText="Pay Now"
-              onClick={() => console.log("yeay")}
-            />
+            <ButtonMedium buttonText="Pay Now" onClick={handlePayNow} />
           ) : (
             <div
               style={{
@@ -228,13 +250,10 @@ const Payment = () => {
                 back to My Tickets to complete the payment
               </div>
               <div className="cancel-topup-button">
-                <ButtonMedium
-                  buttonText="Cancel"
-                  onClick={() => console.log("yeay")}
-                />
+                <ButtonMedium buttonText="Cancel" onClick={handleCancel} />
                 <ButtonMedium
                   buttonText="Top Up"
-                  onClick={() => console.log("yeay")}
+                  onClick={() => navigate("/balance")}
                 />
               </div>
             </div>
