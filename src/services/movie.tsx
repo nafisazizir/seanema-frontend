@@ -35,6 +35,10 @@ class MovieDataService {
   getShowtimes(id: number): Promise<AxiosResponse<ShowtimesByDate>> {
     return http.get(`/movies/${id}/showtimes`);
   }
+
+  getShowtimeDetails(id: number): Promise<AxiosResponse<Showtime>> {
+    return http.get(`/movies/showtime-details/${id}`);
+  }
 }
 
 export default new MovieDataService();

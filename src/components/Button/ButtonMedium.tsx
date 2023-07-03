@@ -8,7 +8,14 @@ interface ButtonMediumProps {
 
 const ButtonMedium: React.FC<ButtonMediumProps> = ({ buttonText, onClick }) => {
   return (
-    <div className="button-medium button-medium-text" onClick={onClick}>
+    <div
+      className={
+        buttonText !== "Cancel"
+          ? "button-medium button-medium-text"
+          : "button-medium-danger button-medium-text"
+      }
+      onClick={onClick}
+    >
       {buttonText}
     </div>
   );
