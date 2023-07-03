@@ -35,16 +35,24 @@ interface User {
   balance: number;
 }
 
+interface Ticket {
+  id: number;
+  user_id: number;
+  showtime_id: number;
+  seat_number: string;
+  transaction_date: string;
+  total_cost: number;
+  status: string;
+}
+
 const Payment = () => {
-  const { movieId, showtimeId } = useParams();
+  const { movieId, showtimeId, ticketId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const seatNumbersString = Array.from(searchParams.getAll("seatNumbers"));
-  const seatNumbers = seatNumbersString ? seatNumbersString.map(Number) : [];
   const [movie, setMovie] = useState<Movie>();
   const [showtime, setShowtime] = useState<Showtime>();
   const [user, setUser] = useState<User>();
+  const [ticket, setTicket] = useState<Ticket>();
+  const seatNumbers = ticket ? ticket?.seat_number.split(",").map(Number) : [];
   const [isBalanceEnough, setIsBalanceEnough] = useState(false);
 
   useEffect(() => {
@@ -79,16 +87,42 @@ const Payment = () => {
       }
     };
 
+    const fetchTicket = async () => {
+      try {
+        const response = await TicketDataService.getTicketDetails(
+          ticketId ? parseInt(ticketId) : 0
+        );
+        setTicket(response.data);
+      } catch (error) {
+        console.error("Failed to fetch ticket details:", error);
+      }
+    };
+
     fetchMovieDetails();
     fetchShowtimeDetails();
     fetchUser();
+    fetchTicket();
   }, []);
 
   useEffect(() => {
-    setIsBalanceEnough(user ? user?.balance >= totalPrice : false);
+    setIsBalanceEnough(
+      user && ticket ? user?.balance >= ticket.total_cost : false
+    );
   }, [user, movie]);
 
-  const totalPrice = movie ? movie?.ticket_price * seatNumbers.length : 0;
+  const handlePayNow = () => {
+    const updatePayment = async () => {
+      try {
+        const response = await TicketDataService.updatePayment(
+          ticketId ? parseInt(ticketId) : 0
+        );
+        navigate("/tikets");
+      } catch (error) {
+        console.error("Failed to complete payment:", error);
+      }
+    };
+    updatePayment();
+  };
 
   return (
     <>
@@ -111,6 +145,20 @@ const Payment = () => {
               justifyContent: "space-evenly",
             }}
           >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "start",
+                justifyContent: "start",
+                gap: "8px",
+              }}
+            >
+              <div className="paragraph-small tag-id">#{ticket?.id}</div>
+              <div className="paragraph-small tag-warning">
+                {ticket?.status}
+              </div>
+            </div>
             <h4>{movie?.title}</h4>
             <div className="headline-text">
               {showtime ? new Date(showtime.show_date).toDateString() : ""},{" "}
@@ -141,7 +189,7 @@ const Payment = () => {
           </div>
           <div className="row-total-price">
             <div className="paragraph-normal">TOTAL PRICE</div>
-            <h6>Rp {totalPrice.toLocaleString()}</h6>
+            <h6>Rp {ticket?.total_cost.toLocaleString()}</h6>
           </div>
         </div>
 
@@ -161,7 +209,7 @@ const Payment = () => {
             </div>
           </div>
 
-          {false ? (
+          {isBalanceEnough ? (
             <ButtonMedium
               buttonText="Pay Now"
               onClick={() => console.log("yeay")}

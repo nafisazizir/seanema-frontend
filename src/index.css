@@ -7,7 +7,9 @@
   --color-grey-100: #1a1a1a;
   --color-grey-80: #484848;
   --color-grey-60: #767676;
+  --color-grey-40: #a4a4a4;
   --color-grey-20: #d2d2d2;
+  --color-grey-10: #e3e3e3;
   --color-grey-5: #ededed;
 
   --color-primary-100: #5925dc;
@@ -17,7 +19,17 @@
   --color-primary-20: #d9d6fe;
   --color-primary-10: #f4f3ff;
 
+  --color-success-100: #2bb930;
+  --color-success-50: #95dc98;
+  --color-success-10: #eaf8ea;
+
+  --color-warning-100: #ff9514;
+  --color-warning-50: #ffca8a;
+  --color-warning-10: #fff4e7;
+
   --color-danger-100: #e6131b;
+  --color-danger-50: #f3898d;
+  --color-danger-10: #fde7e8;
 }
 
 body {
@@ -172,6 +184,28 @@ h6 {
   text-transform: uppercase;
 }
 
+.tag-id {
+  background-color: var(--color-grey-5);
+  border-radius: 6px;
+  border: 1px solid var(--color-grey-40);
+  color: var(--color-grey-60);
+  font-size: 14px;
+  font-family: Urbanist;
+  font-style: normal;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.tag-warning {
+  background-color: var(--color-warning-10);
+  border-radius: 6px;
+  border: 1px solid var(--color-warning-100);
+  color: var(--color-warning-100);
+  font-weight: 600;
+  padding: 4px 8px;
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   h2 {
     font-size: 52px;
@@ -224,5 +258,10 @@ h6 {
 
   .headline-text {
     font-size: 14px;
+  }
+
+  .paragraph-small {
+    font-size: 12px;
+    line-height: 20px;
   }
 }

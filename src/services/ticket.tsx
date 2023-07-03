@@ -9,7 +9,7 @@ interface Ticket {
   id: number;
   user_id: number;
   showtime_id: number;
-  seat_number: number[];
+  seat_number: string;
   transaction_date: string;
   total_cost: number;
   status: string;
@@ -18,6 +18,14 @@ interface Ticket {
 class TicketDataService {
   bookTickets(params: any): Promise<AxiosResponse<Ticket>> {
     return http.post(`/tickets/book`, params);
+  }
+
+  getTicketDetails(id: number): Promise<AxiosResponse<Ticket>> {
+    return http.get(`/tickets/${id}`);
+  }
+
+  updatePayment(id: number): Promise<AxiosResponse<Ticket>> {
+    return http.post(`/tickets/payment/${id}`);
   }
 
   getAvailableSeats(showtimeId: number): Promise<AxiosResponse<Seat>> {
