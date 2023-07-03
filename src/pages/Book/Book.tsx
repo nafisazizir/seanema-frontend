@@ -117,11 +117,21 @@ const Book = () => {
   };
 
   const handleContinueClick = () => {
-    navigate(
-      `/movies/${movieId}/book/${showtimeId}/payment?${queryString.stringify({
-        seatNumbers: selectedSeats,
-      })}`
-    );
+    const bookTickets = async () => {
+      try {
+        const response = await TicketDataService.bookTickets({
+          seatNumbers: selectedSeats,
+          showtimeId: showtimeId,
+          status: "not paid",
+        });
+        const data = response.data;
+        navigate(`/movies/${movieId}/book/${showtimeId}/payment/${data.id}`);
+      } catch (error) {
+        console.error("Failed to book tickets:", error);
+      }
+    };
+
+    bookTickets();
   };
 
   return (

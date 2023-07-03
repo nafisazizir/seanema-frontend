@@ -24,7 +24,7 @@ function App() {
           <Route path="/movies/:id" element={<MovieDetails />} />
           <Route path="/movies/:movieId/book/:showtimeId" element={<Book />} />
           <Route
-            path="/movies/:movieId/book/:showtimeId/payment"
+            path="/movies/:movieId/book/:showtimeId/payment/:ticketId"
             element={<Payment />}
           />
 
