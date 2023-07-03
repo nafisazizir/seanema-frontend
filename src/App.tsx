@@ -14,6 +14,7 @@ import Balance from "./pages/Balance/Balance";
 import Book from "./pages/Book/Book";
 import Payment from "./pages/Payment/Payment";
 import Ticket from "./pages/Ticket/Ticket";
+import TicketDetails from "./pages/TicketDetails/TicketDetails";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           />
 
           <Route path="/tickets" element={<Ticket />} />
+          <Route path="/tickets/:id" element={<TicketDetails />} />
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
